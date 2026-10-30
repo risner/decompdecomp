@@ -234,8 +234,8 @@ game's code is its rights holder's: keep it to yourself.
 recommended.
 
 Proprietary compilers (CodeWarrior, Visual C++, IDO) are installed only after you accept their licenses in the app.
-Visual C++ 2017 (which builds PC games of 2015 and newer) runs through [wine](https://www.winehq.org/) on Linux and macOS, which you
-install yourself (your distribution's `wine` package; on a Mac, Wine Stable from [Gcenx's builds](https://github.com/Gcenx/macOS_Wine_builds/releases), which needs
+Visual C++ 2017 (which builds PC games of 2015 and newer, and 64-bit ones) runs through [wine](https://www.winehq.org/) on Linux and
+macOS, which you install yourself (your distribution's `wine` package; on a Mac, Wine Stable from [Gcenx's builds](https://github.com/Gcenx/macOS_Wine_builds/releases), which needs
 Rosetta 2 on Apple Silicon): the app says so when you install that pack. The older Visual C++ run without it.
 
 ## Questions people ask

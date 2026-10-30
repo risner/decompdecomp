@@ -21,24 +21,24 @@ folder, `src/decompnet/consoles/<id>/`; a new console adds a column (CONTRIBUTIN
 | Start from your own copy | ✓ | ✓ | ✓ | ✓ unencrypted or decrypted program and modules (ISO, CSO, CHD) | ✓ | ✓ | ✓ | fork by address |
 | Judge | link · compare | link · compare | link · compare | link · compare | objdiff | objdiff | objdiff | objdiff |
 | Machine drafts (m2c, Ghidra for x86) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ Ghidra | — | by architecture |
-| Autopilot: free matches from drafts | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ exact drafts of tiny shapes; Ghidra's made compilable | — | — |
+| Autopilot: free matches from drafts | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ exact drafts of tiny shapes (32-bit); Ghidra's made compilable | — | — |
 | Drafts follow the header, made in the background; `redraft` | ✓ | ✓ | ✓ | ✓ | — | ✓ Ghidra's | — | — |
 | C++ methods drafted as `Class::method` | ✓ | ✓ | ✓ | ✓ | — | ✓ (RTTI, and classes from the vtables constructors store) | — | — |
 | Twins: free matches from identical code | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Permuter on near misses | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Hand-written assembly set aside | ✓ | ✓ | ✓ | ✓ | ✓ | Visual C++'s exception-handling stubs | BIOS call stubs, pieces of functions | MIPS, PowerPC, ARM's BIOS stubs and pieces of functions |
-| Pieces of functions joined to their function | — | — | — | — | — | ✓ (`scratch.merge_pieces`) | ✓ (`recover.merge_pieces`) | — |
+| Hand-written assembly set aside | ✓ | ✓ | ✓ | ✓ | ✓ | Visual C++'s exception-handling stubs (64-bit: the funclets its exception data names) | BIOS call stubs, pieces of functions | MIPS, PowerPC, ARM's BIOS stubs and pieces of functions |
+| Pieces of functions joined to their function | — | — | — | — | — | ✓ (`scratch.merge_pieces`; 64-bit: .pdata's extents, none to join) | ✓ (`recover.merge_pieces`) | — |
 | Agents' verdict "no C makes this" (3 agents of 2 models: set aside, red in the map) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Check again (and before helpers start, once after each update) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Kernel stubs set aside and named | — | set aside (BIOS calls) | ✓ | set aside, named by library and NID | — | ✓ import thunks | — | — |
 | Function-end reports (`report_boundary`) | ✓ | ✓ | ✓ | ✓ | — | ✓ (agents agree, the rebuild checks) | — | — |
 | Compiler ranges and suggestions | ✓ | ✓ | ✓ | ✓ | from scratch: per source file (`try_compiler`, Settings); else the project's build | per source file (`try_compiler`, Settings) | per source file (`try_compiler`, Settings) | the project's build |
-| Flag search (`search_flags`) | ✓ | ✓ | ✓ | ✓ | the project's build | per source file (/Oy-, /O1, /Ob1) | the project's build | the project's build |
+| Flag search (`search_flags`) | ✓ | ✓ | ✓ | ✓ | the project's build | per source file (/Oy- on 32-bit, /O1, /Ob1) | the project's build | the project's build |
 | Compiler map and the judge's survey | ✓ | ✓ | ✓ | ✓ | — | ✓ per source file, Rich header | — | — |
 | Range checks: a range applies after its neighbours confirm it | ✓ | ✓ | ✓ | ✓ | — | ✓ over source files | — | — |
 | C++ classes from the code (`get_class`) | ✓ | ✓ | ✓ | ✓ | — | ✓ (named by RTTI where the program has it) | — | — |
 | Struct layouts from loads and stores (`guess_struct`) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | — |
-| The game's own debug symbols: names, types, prototypes | — | — | ✓ symbol table, STABS, DWARF 1; the compiler of each object file | ✓ symbol table, DWARF 1 | — | ✓ PDB (Visual C++ 6.0's PDB 2.0, MSF 7.00), linker map, COFF symbols | — | — |
+| The game's own debug symbols: names, types, prototypes | — | — | ✓ symbol table, STABS, DWARF 1; the compiler of each object file | ✓ symbol table, DWARF 1 | — | ✓ PDB (Visual C++ 6.0's PDB 2.0, MSF 7.00), linker map, COFF symbols (64-bit games': untested) | — | — |
 | Twins across your games | ✓ | ✓ | ✓ | ✓ | — | ✓ (between PC projects) | — | — |
 | Shared knowledge (two models agree) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Tidy each source file once it's polished (shared types in one header, names, dead declarations) | — | — | — | — | ✓ | ✓ | ✓ | ✓ |
@@ -60,16 +60,16 @@ Where to start on a gap:
   Ghidra drafts a delinked object without its callees' prototypes, so a method call loses `this` and a callee's
   arguments are guessed (a draft fed the project's headers, through a Ghidra script that applies them, is the next
   step). Games built with Visual C++ 6.0 to 2010 and 2017 can match; 2015's and 2019 and newer's build with 2017's,
-  2012-2013's with 2010's: Newer Windows games, below, is the plan for their own compilers and 64-bit. A class's
-  constructors are one real name (`CFoo::CFoo`), so of two at two addresses (a copy constructor) only one can be
-  written as a constructor: names.py would need the mangled signature in "names". A game's own DLLs come along when
-  its folder or .exe is given by path; a dropped .exe comes alone (a browser doesn't hand over the folder), a project
-  made before can't take its DLLs in yet (Reimport analyses the programs a project has), a project restored or cloned
-  asks only for the .exe (`ForkProject.needs` names one file: the DLLs go in `orig/` by hand, as its README says),
-  and a game whose .exe can't start (64-bit, mostly /GL, protected) can't start from its DLLs either. Visual C++ 2017
-  inlines a file's small functions into their callers, defined before them or after: a project's file that holds two
-  of the original's (about 4 KiB of functions each) needs `split_file` where the second starts before its callers
-  match (the guide says so).
+  2012-2013's with 2010's, every 64-bit game with 2017's 64-bit compiler: Newer Windows games, below, is the plan for
+  their own compilers. A class's constructors are one real name (`CFoo::CFoo`), so of two at two addresses (a copy
+  constructor) only one can be written as a constructor: names.py would need the mangled signature in "names". A game's
+  own DLLs come along when its folder or .exe is given by path; a dropped .exe comes alone (a browser doesn't hand over
+  the folder), a project made before can't take its DLLs in yet (Reimport analyses the programs a project has), a
+  project restored or cloned asks only for the .exe (`ForkProject.needs` names one file: the DLLs go in `orig/` by hand,
+  as its README says), and a game whose .exe can't start (for ARM, mostly /GL, protected) can't start from its DLLs
+  either. Visual C++ 2017 inlines a file's small functions into their callers, defined before them or after: a project's
+  file that holds two of the original's (about 4 KiB of functions each) needs `split_file` where the second starts
+  before its callers match (the guide says so).
 - **Windows PC debug symbols** (`consoles/pc/debuginfo.py`): Ghidra's function boundaries stay Ghidra's, though a
   PDB gives each function's size; CodeView embedded in the program (NB09, NB11: Visual C++ 4-5 with /PDB:NONE) and
   Visual C++ 4's 16-bit type records aren't read; a class's methods aren't written into its struct (C++ calls a
@@ -93,6 +93,24 @@ Where to start on a gap:
   weren't tried); what's missing is opening a save's best attempts in a new copy of the project.
 
 ## Recently done
+
+- **64-bit Windows games (x64).** A 64-bit program (PE32+) imports like a 32-bit one and builds with Visual C++
+  2017's 64-bit compiler, the packs' only one: a game built with 2015, 2019 and newer, or 2005 to 2013's 64-bit
+  compilers builds with it, and the import says how near that is. Its functions come from the program, not
+  Ghidra's guesses: the exception directory (`.pdata`) has the start and end of every function that uses the stack
+  (a function's chained parts joined to it, its jump tables in it), and the leaf functions between them are read
+  from the code, one after another (on the 64-bit demo Ghidra finds 7 of 18 functions; a test compares the two).
+  The funclets of C++ exception handling are set aside exactly, as the functions' own exception data (FuncInfo, or
+  `__try`'s scope table) names them. Its relocations are x64's: rip-relative (REL32 to REL32_5), image-relative
+  (ADDR32NB: a switch's tables and some arrays, read through `__ImageBase`) and 64-bit addresses; the project's
+  objects are AMD64 (functions.json's `"machine": "x64"`), its names undecorated and 9 digits or more
+  (`func_140001000`), its rebuild check reads PE32+ and moves a DLL by DIR64 relocations. RTTI is read the 64-bit way
+  (RVAs, 8-byte vtable slots) and the struct and class reader follows x64's calling convention (rcx is `this`,
+  rdx, r8, r9 the next arguments). Demo Quest built by 2017's 64-bit compiler (`build.py 14.16-x64`) imports with
+  every function at its exact extent, all of it matches from its C, and it rebuilds byte for byte; a small real
+  64-bit C++ program (exceptions, /GS, /MD, virtual classes) imports with its funclets and import thunks set aside,
+  its classes named by RTTI, and its functions match from their C++. The drop zone takes a 64-bit .exe and
+  offers its pack.
 
 - **Games built with Visual C++ 2017 (and 2015, 2019 and newer, with it).** The import's block for 2017 and newer is
   gone: 2017's Rich builds lead to the pack's `14.16` (build 27027 is its very own; another 2017 update's builds with
@@ -555,10 +573,11 @@ compiler instead of the nearest.
   file with /GL and linking it with /LTCG against stubs; until then a mostly-/GL game isn't started.
 - **Visual C++ 2017 on Windows, and /Zi under wine.** On a Windows computer the 2017 pack is untested. Under wine,
   /Zi with /FS fails (C1902: no mspdbsrv), which no project's build uses.
-- **F, 64-bit.** Read PE32+ programs and delink their relocations (nearly all relative), with the x64 calling
-  convention. A 64-bit program lists every function's start and end in its exception directory (`.pdata`), so
-  functions come from the program, not Ghidra's guess. Done when a 64-bit demo, then a real game, imports and
-  matches.
+- **64-bit games, what's left** (64-bit games start: Recently done). Each Visual Studio version's own 64-bit
+  compiler, with its pack (2017's builds every 64-bit game until then). Autopilot's exact drafts of tiny shapes
+  (`drafts.exact`) read 32-bit code only: a 64-bit game gets Ghidra's drafts. PDBs and maps of 64-bit games are
+  read as 32-bit ones are, untested on a real game's. A whole-program optimised game's cold parts of functions,
+  which `.pdata` chains to a function elsewhere, stay functions of their own.
 
 ### PSP: encrypted programs, ZSO images, imported names
 Most retail PSP programs (EBOOT.BIN) are encrypted, and decrypting them takes Sony's keys: decompdecomp doesn't
