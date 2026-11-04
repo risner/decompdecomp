@@ -117,10 +117,19 @@ def register(app: App) -> None:
         return {"ok": why is None, "message": why}
 
     def p_delete(slug, request, data):
+        """Remove a project, even one whose progress folder can't be synchronized (deleted, or a manifest it rejects):
+        the lookups here would synchronize it first and fail, leaving no way to remove it (saves._discard_imported)."""
         manager.forget_project(slug)  # (it stopped every project's helpers)
-        proj = net.project_row(slug)
-        net.knowledge.forget(slug)
-        net.remove_project(slug)
+        proj = net.store.one("SELECT * FROM projects WHERE slug=?", slug)
+        if proj is None:
+            raise NetworkError(f"no project {slug!r} here: check its name, or whether it was removed")
+        previous = getattr(net.progress.local, "busy", False)
+        net.progress.local.busy = True
+        try:
+            net.knowledge.forget(slug)
+            net.remove_project(slug)
+        finally:
+            net.progress.local.busy = previous
         if data.get("files"):
             shutil.rmtree(proj["root"], ignore_errors=True)
         if settings.data.get("last_project") == slug:
