@@ -68,19 +68,18 @@ Where to start on a gap:
   arguments are guessed (a draft fed the project's headers, through a Ghidra script that applies them, is the next
   step). Games built with Visual C++ 6.0 to 2010 and 2017 can match; 2015's and 2019 and newer's build with 2017's,
   2012-2013's with 2010's, every 64-bit game with 2017's 64-bit compiler: Newer Windows games, below, is the plan for
-  their own compilers. A class's
-  constructors are one real name (`CFoo::CFoo`), so of two at two addresses (a copy constructor) only one can be
-  written as a constructor: names.py would need the mangled signature in "names". A game's own DLLs come along when
-  its folder or .exe is given by path; a dropped .exe comes alone (a browser doesn't hand over the folder), a project
-  made before can't take its DLLs in yet (Reimport analyses the programs a project has), a project restored or cloned
-  asks only for the .exe (`ForkProject.needs` names one file: the DLLs go in `orig/` by hand, as its README says),
-  and a game whose .exe can't start (for ARM, mostly /GL, protected) can't start from its DLLs either. Visual C++ 2017
-  inlines a file's small functions into their callers, defined before them or after: a project's file that holds two
-  of the original's (about 4 KiB of functions each) needs `split_file` where the second starts before its callers
-  match (the guide says so).
+  their own compilers. A class’s constructors are one real name (`CFoo::CFoo`), so of two at two addresses (a copy
+  constructor) only one can be written as a constructor: names.py would need the mangled signature in "names". A
+  game's own DLLs come along when its folder or .exe is given by path; a dropped .exe comes alone (a browser doesn't
+  hand over the folder), a project made before can't take its DLLs in yet (Reimport analyses the programs
+  a project has), a project restored or cloned asks only for the .exe (`ForkProject.needs` names one file: the DLLs go in
+  `orig/` by hand, as its README says), and a game whose .exe can't start (for ARM, mostly /GL, protected) can't start
+  from its DLLs either. Visual C++ 2017 inlines a file's small functions into their callers, defined before them or after: a
+  project's file that holds two of the original's (about 4 KiB of functions each) needs `split_file` where the second
+  starts before its callers match (the guide says so).
 - **Windows PC debug symbols** (`consoles/pc/debuginfo.py`): Ghidra's function boundaries stay Ghidra's, though a
-  PDB gives each function's size; CodeView embedded in the program (NB09, NB11: Visual C++ 4-5 with /PDB:NONE) and
-  Visual C++ 4's 16-bit type records aren't read; a class's methods aren't written into its struct (C++ calls a
+  PDB gives each function's size; CodeView embedded in the program (NB09, NB11: Visual C++ 4-5 with /PDB:NONE)
+  and Visual C++ 4's 16-bit type records aren't read; a class's methods aren't written into its struct (C++ calls a
   method only through a declaration in the class), and optimised code's register locals (2005's S_LOCAL ranges)
   aren't listed. A game's PDB has to be beside its program, or dropped with it, at import: a project made before
   can't take one in yet.
@@ -131,9 +130,9 @@ Where to start on a gap:
   2017 and linked by its own linker under wine (`projects/demo-pc/build.py 14.16`) imports with every function,
   rebuilds byte for byte, and all of it matches from its C but the hand-written `_ftol` (split where `game.c` starts: 2017
   inlines a file's functions into each other). What 2017 showed, fixed for every game: code before the first function
-  Ghidra found (a function inlined everywhere, first in `.text`) is a function too; a `catch (...) {}` block (only `mov
-  eax, <where to go on>; ret`) is joined to its function; from 2015 on, the int3 after a call that never returns is the
-  function's own; 2017's exception handlers that check the function's /GS cookie first are set aside as stubs; a game
+  Ghidra found (a function inlined everywhere, first in `.text`) is a function too; a `catch (...) {}` block (only
+  `mov eax, <where to go on>; ret`) is joined to its function; from 2015 on, the int3 after a call that never returns is
+  the function's own; 2017's exception handlers that check the function's /GS cookie first are set aside as stubs; a game
   that imports its C runtime from DLLs (vcruntime140, the Universal CRT) builds with /MD, so the runtime's calls go
   through its imports; and a split moves a PC program's functions with their rows (they were added anew, their names
   ending in `'`). A project made before gets the handlers and the catch blocks at its next start (analysis step 7); the
@@ -176,12 +175,11 @@ Where to start on a gap:
   game's own symbols do; a NID it doesn't know keeps `<library>_<NID>`). The disc's other PRX modules come with it,
   each a segment laid out after the main program (that game: 28 modules, 9,508 more functions to decompile, 36,002
   more stubs set aside), their functions matching with CodeWarrior 3.0.1 too. The game's own debug symbols come with
-  it: the symbol table and
-  CodeWarrior's DWARF 1 (source files, prototypes, types, also for CodeWarrior PS2 games). Diffs read the Allegrex's
-  VFPU and its own instructions through rabbitizer. Compilers: CodeWarrior for PSP 3.0.1 (11 builds), the PSP SDK's
-  GCC 3.3.3 (1.3.1 and 1.7.1) and SN's pspsnc (known by its code, which moves registers with `or`: the demo built with
-  it imports, matches at -O2 -G8 and rebuilds byte for byte). On a PSP game with debug symbols: 2,465 functions, 2,458
-  named, CodeWarrior 3.0.1 matching its functions byte for byte. Every row of the table was then tried on the PSP
+  it: the symbol table and CodeWarrior's DWARF 1 (source files, prototypes, types, also for CodeWarrior PS2 games). Diffs
+  read the Allegrex’s VFPU and its own instructions through rabbitizer. Compilers: CodeWarrior for PSP 3.0.1 (11 builds), the
+  PSP SDK’s GCC 3.3.3 (1.3.1 and 1.7.1) and SN's pspsnc (known by its code, which moves registers with `or`: the demo built
+  with it imports, matches at -O2 -G8 and rebuilds byte for byte). On a PSP game with debug symbols: 2,465 functions,
+  2,458 named, CodeWarrior 3.0.1 matching its functions byte for byte. Every row of the table was then tried on the PSP
   demo and that game: autopilot matched 251 of the game's 1,968 open functions from drafts and twins 19 more, and its
   export with those 270 in C rebuilds byte for byte, from a fresh clone too. What that turned up is fixed for every
   console: the permuter now reads autopilot's drafts, get_class reads GCC 3's and SNC's vtables, SNC's C++ names
@@ -283,18 +281,18 @@ Where to start on a gap:
   out of two functions of an older project, whose code still rebuilds byte for byte.
 - **Windows PC games of 2005 to 2012 build with their own Visual C++.** A game built with Visual C++ 2005 or later
   imported but built with 7.1, so nothing of it could match. The `msvc2005` pack (proprietary, installed after the
-  user accepts it) has 2005, 2005 SP1, 2008, 2008 SP1, 2010 and 2010 SP1, from the decomp community's archives, and each
-  runs through the pinned wibo (2010's with the redistributable's `msvcp100.dll` beside it). The import builds a game
-  with the build its Rich header names (`RICH_BUILDS`), or the closest of its version and says so, and tells a game
+  user accepts it) has 2005, 2005 SP1, 2008, 2008 SP1, 2010 and 2010 SP1, from the decomp community's archives, and
+  each runs through the pinned wibo (2010's with the redistributable's `msvcp100.dll` beside it). The import builds a
+  game with the build its Rich header names (`RICH_BUILDS`), or the closest of its version and says so, and tells a game
   whose compiler isn't installed which pack to install. The demo builds with each (`build.py 10.0SP1`), imports with
   that build, and agents' C matches. Functions inlined everywhere are found one by one between the int3s these
   compilers pad functions with: the demo built with 2010 had 14 of its 19 functions found, the five in the gaps run
   together. On real games: a 2005 game without a Rich header (its linker says 8.0) builds with 2005 SP1, its 28,777
   functions rebuild byte for byte, and 8 of 9 small functions written by hand matched on the first try; a 2010 SP1
   game builds with 2010 SP1, 27,023 functions, 6,583 exception-handling stubs set aside, and 4 of 8 matched at once
-  (the rest: two return types guessed wrong, a function compiled with frame pointers, which `#pragma optimize("y",
-  off)` gives, and a C runtime function built for size). That game keeps an ebp frame in about half its functions:
-  if all of it was built with /Oy-, a project flag would serve better than a pragma per function.
+  (the rest: two return types guessed wrong, a function compiled with frame pointers, which `#pragma optimize("y", off)`
+  gives, and a C runtime function built for size). That game keeps an ebp frame in about half its functions: if all of it was
+  built with /Oy-, a project flag would serve better than a pragma per function.
 - **PC projects get the newest build tools.** A PC project kept the `tools/` it was made with, so a newer names.py
   (constructors and destructors paired by their class) or delink.py never reached one. The template's tools have a
   version (`scratch.tools_version`, the manifest's "tools"): a project with another gets them when the app starts
@@ -534,9 +532,9 @@ Where to start on a gap:
   and the hidden native window. KMC GCC/binutils require Rosetta on Apple Silicon; unavailable Linux-only
   compilers remain unavailable. PS1 GCC 2.6.3 builds natively from pinned source on Intel and Apple Silicon Macs
   with Xcode Command Line Tools; GCC 2.7.2, 2.7.2 CDK and 2.8.1 use pinned native Apple Silicon builds with maspsx;
-  the other PS1 GCCs and EGCS 2.91.66 need Linux, or Windows through WSL 2. The
-  assembler helper uses the app's Python rather than Apple's older system Python. Mac workers use per-thread QoS
-  so they don't lower the whole app's priority.
+  the other PS1 GCCs and EGCS 2.91.66 need Linux, or Windows through WSL 2. The assembler helper uses the app's
+  Python rather than Apple's older system Python. Mac workers use per-thread QoS so they don't lower the whole app's
+  priority.
 - **Linux packages**: a `.deb`, an `.rpm` and an AppImage with their own Python, built for each release.
 - **Windows native app**: a WebView2 window, Start menu and desktop shortcuts, and a native tray icon.
   A custom native caption follows the app's theme, with Windows resizing, snapping and drag-to-restore. Scrollbars
@@ -612,10 +610,9 @@ link-time code generation (/GL, /LTCG), as most Xbox games were: the import tell
 dialog says), units build in harness mode (`tools/ltcg.py`: the unit, a driver calling its functions as the game's
 call sites do, and stand-ins, linked /LTCG by the compiler's own linker through wine), briefs show each function's
 convention, `standins_for` writes a starting harness, and a register-convention function of a retail game matched
-through its driver.
-Briefs also say when a function is a member function (its `this` in any register) and of which struct, and an
-attempt whose function got another convention than the original's says which registers differ. What's next is real
-games: a whole one rebuilt from C, then the console's status can say recommended.
+through its driver. Briefs also say when a function is a member function (its `this` in any register) and of which struct,
+and an attempt whose function got another convention than the original's says which registers differ. What's next is
+real games: a whole one rebuilt from C, then the console's status can say recommended.
 
 ### Game Boy Advance from your own copy
 
