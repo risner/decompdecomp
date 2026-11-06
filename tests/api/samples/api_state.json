@@ -1,0 +1,22 @@
+{
+ "agents": "<varies>",
+ "agents_detecting": "<varies>",
+ "api_presets": "<varies>",
+ "bridges_removed": "<varies>",
+ "build": "<varies>",
+ "consoles": "<varies>",
+ "dev": true,
+ "home": "<varies>",
+ "install": "<varies>",
+ "linux_vm": {
+  "ready": false,
+  "why": "<text>"
+ },
+ "log_file": "<varies>",
+ "mcp_url": "<varies>",
+ "platform": "<varies>",
+ "settings": "<varies>",
+ "system": "<varies>",
+ "toolchains": "<varies>",
+ "version": "<varies>"
+}

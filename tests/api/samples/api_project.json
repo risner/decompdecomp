@@ -1,0 +1,62 @@
+{
+ "attempts": 23,
+ "auto_compiler": false,
+ "autopilot": null,
+ "boundaries": [],
+ "bytes": 4032,
+ "compiler": {
+  "flags": [],
+  "installed": "<varies>",
+  "known": true,
+  "missing": "<varies>",
+  "name": "KMC GCC 2.7.2",
+  "proprietary": false,
+  "supported": true,
+  "toolchain": "gcc-2.7.2-kmc",
+  "why": null
+ },
+ "compiler_ranges": [],
+ "compilers": [
+  "gcc-2.7.2-kmc",
+  "ido-7.1",
+  "ido-5.3"
+ ],
+ "context_version": 1,
+ "description": null,
+ "export": null,
+ "exportable": true,
+ "folder": "~/tui-root",
+ "functions": 8,
+ "helper_matches": 0,
+ "instructions": "Prefer the smallest functions first.",
+ "last_activity": 0,
+ "layout": "splat",
+ "matched": 2,
+ "matched_bytes": 576,
+ "permuter": null,
+ "platform": "n64",
+ "platform_name": "Nintendo 64",
+ "platform_short": "N64",
+ "priority": [
+  "func_80000070"
+ ],
+ "readable": 1,
+ "rom": {
+  "byte_order": "big",
+  "compiler_guess": null,
+  "game_code": "TSED",
+  "region": "E",
+  "sha1": "0000000000000000000000000000000000000000",
+  "size": 1048576,
+  "title": "TUI Seed"
+ },
+ "room": null,
+ "save_folder": "~/tui-root/progress",
+ "set_aside": 2,
+ "set_aside_bytes": 1056,
+ "slug": "tui-seed",
+ "spend": null,
+ "suggestions": [],
+ "title": "TUI Seed",
+ "twins": null
+}

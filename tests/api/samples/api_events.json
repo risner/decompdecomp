@@ -1,0 +1,14 @@
+{
+ "events": [
+  {
+   "agent": "claude-3",
+   "created_at": 0,
+   "detail": "func_80000010 matched",
+   "id": 1,
+   "kind": "match",
+   "project": "TUI Seed",
+   "slug": "tui-seed"
+  }
+ ],
+ "last": 1
+}

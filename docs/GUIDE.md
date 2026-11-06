@@ -292,6 +292,45 @@ window; the tray icon where available (or `decomp`) brings it back. **Quit** end
 **Updates.** When a new version is available, the app asks you one time. One click installs it and restarts the app.
 Helper agents continue their work. To change this behavior, go to Settings.
 
+## On a server: decomp serve
+
+decompdecomp needs no desktop. On a machine with no screen to open a window on — e.g. a server in a colo —
+`decomp serve` runs the same app in a terminal: the server, the agents and the autopilot, and a text front end (the
+TUI) in place of the window. The full GUI reaches a browser through an SSH tunnel. Use the TUI, the browser, or
+both at once.
+
+Run it inside `screen` or `tmux`, so it keeps running after you log out (`decomp serve` takes no options and stays in
+the foreground):
+
+```
+screen -S decomp
+decomp serve
+```
+
+Detach with `Ctrl-A d` (`tmux`: `Ctrl-B d`) and log out; later, `screen -r decomp` (`tmux attach`) brings the TUI
+back. When it updates itself, it comes back as `decomp serve` again.
+
+**The TUI.** Three screens — `1` your projects, `2` the function map, `3` the agents at work and the app's log —
+with `?` listing the keys. This first version only reads: everything that changes a project is done in the browser
+or the window. `q` stops decompdecomp and its agents (it asks first); to leave it running, detach from `screen` or
+`tmux` instead. What the screens show, and what the TUI may grow into, is in [TUI.md](TUI.md).
+
+**The browser.** From your own machine, open a tunnel and browse to `http://127.0.0.1:6464` — 6464 is the app's
+port unless something else on the server holds it, and the TUI's top line shows the address it took:
+
+```
+ssh -L 6464:127.0.0.1:6464 user@server
+```
+
+The first time, open the one-time link `decomp serve` shows (in the TUI, `b` shows a fresh one): it pairs that
+browser with the app, and everything works as in the window. Each link works once; after a restart, pair again. The
+app still listens on `127.0.0.1` only — nothing is exposed on the network, and reaching it takes a login to the
+server. A SOCKS proxy (`ssh -D 1080`) also works: point the browser at `127.0.0.1:1080` and configure the
+browser to send localhost over the proxy.
+
+The TUI comes with the `tui` extra (`uv tool install '/path/to/decompdecomp[tui]'`); installs that skip it still
+serve the browser — `decomp serve` then prints the address and the pairing link and waits.
+
 ## Your work
 
 **Saving.** decompdecomp saves the work on each N64, PlayStation and PlayStation 2 project by itself as it changes, as plain

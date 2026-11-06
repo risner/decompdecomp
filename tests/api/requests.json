@@ -1,0 +1,33 @@
+{
+  "/api/agents/detect": {"body": {}},
+  "/api/autopilot": {"body": {"slug": "tui-seed", "action": "stop"}},
+  "/api/boundary": {"body": {"slug": "tui-seed", "id": 1, "action": "apply"}},
+  "/api/close": {"body": {"keep": true}},
+  "/api/compiler": {"body": {"slug": "tui-seed", "toolchain": "no-such-toolchain"}},
+  "/api/compilermap": {"body": {"slug": "tui-seed"}},
+  "/api/delete": {"body": {"slug": "delete-me"}},
+  "/api/export": {"body": {"slug": "tui-seed"}},
+  "/api/instructions": {"body": {"slug": "tui-seed", "text": "Prefer the smallest functions first."}},
+  "/api/job/cancel": {"body": {"id": "none"}},
+  "/api/knowledge": {"body": {"slug": "tui-seed", "auto": false}},
+  "/api/log": {"body": {"message": "(the snapshot test asking)", "where": "tests/api", "stack": ""}},
+  "/api/note": {"body": {"slug": "tui-seed", "text": "Watch the jump table.", "function": null}},
+  "/api/priority": {"body": {"slug": "tui-seed", "name": "func_80000070", "on": true}},
+  "/api/recheck": {"body": {"slug": "tui-seed"}},
+  "/api/release": {"body": {"slug": "tui-seed", "name": "func_80000020"}},
+  "/api/reimport": {"body": {"slug": "tui-seed", "confirmed": true, "path": "/nowhere/game.z64"}},
+  "/api/reopen": {"body": {"slug": "tui-seed", "name": "func_80000060"}},
+  "/api/restore": {"body": {"confirmed": true, "source": "/nowhere/save", "path": "/nowhere/game.z64"}},
+  "/api/save": {"body": {"slug": "tui-seed"}},
+  "/api/settings": {
+    "body": {"per_session": 3},
+    "fields": ["api", "endpoint", "remove_endpoint", "per_session", "autopilot", "budget_usd", "auto_update",
+               "check_updates", "auto_compiler"]
+  },
+  "/api/setaside": {"body": {"slug": "tui-seed", "name": "func_80000060", "why": "no C makes it"}},
+  "/api/scope": {"body": {"slug": "tui-seed", "scope": "game"}},
+  "/api/suggestion": {"body": {"slug": "tui-seed", "id": 1, "action": "apply"}},
+  "/api/title": {"body": {"slug": "tui-seed", "title": "TUI Seed Game"}},
+  "/api/try": {"body": {"slug": "tui-seed", "name": "no-such-function", "source": ""}},
+  "/api/unanalysed": {"body": {"slug": "tui-seed"}}
+}

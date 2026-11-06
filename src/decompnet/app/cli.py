@@ -204,14 +204,31 @@ def run(args, serve: bool = False) -> int:
         # (1.0.2 and older restart into a new version without saying: they had a browser tab, which can't follow)
         if not restarted or restarted.get("window", True):
             _open_when_ready(port)
-    else:
-        print(f"{edition.NAME} {__import__('decompnet').__version__}\nyour projects: {hostenv.shown_path(home)}"
-              + f"\nserving the GUI to a browser through an SSH tunnel (ssh -L {port}:127.0.0.1:{port});"
-              + f" open this link there, once:\n  http://127.0.0.1:{port}/pair?code={pair.new_code()}"
-              + ("\nupdated and restarted" if restarted else "\nstop with Ctrl-C"), flush=True)
+        try:
+            uvicorn.Server(server_config(app)).run(sockets=[sock])
+        except Exception:  # quit_app ends the process at once: say why first, or the app just vanishes
+            log.exception("the server stopped")
+            traceback.print_exc()
+        finally:
+            quit_app()
+        return 0
+
+    # `decomp serve`: the server in a background thread, the TUI in this terminal (tui/__init__.py). Without the
+    # tui extra, or where this isn't a terminal (a service, a pipe): the address and the browser link, as before.
+    from . import tui
+
+    server = uvicorn.Server(server_config(app))
+    threading.Thread(target=server.run, kwargs={"sockets": [sock]}, daemon=True, name="server").start()
     try:
-        uvicorn.Server(server_config(app)).run(sockets=[sock])
-    except Exception:  # quit_app ends the process at once: say why first, or the app just vanishes
+        if tui.run(port, secret, pair.new_code):
+            quit_app()  # the TUI ran and the user left it: stop decompdecomp and its agents, as the TUI warned
+        else:
+            print(f"{edition.NAME} {__import__('decompnet').__version__}\nyour projects: {hostenv.shown_path(home)}"
+                  + f"\nserving the GUI to a browser through an SSH tunnel (ssh -L {port}:127.0.0.1:{port});"
+                  + f" open this link there, once:\n  http://127.0.0.1:{port}/pair?code={pair.new_code()}"
+                  + ("\nupdated and restarted" if restarted else "\nstop with Ctrl-C"), flush=True)
+            threading.Event().wait()  # the server's thread serves; Ctrl-C lands here
+    except Exception:
         log.exception("the server stopped")
         traceback.print_exc()
     finally:

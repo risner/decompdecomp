@@ -1,0 +1,15 @@
+{
+ "api": {},
+ "auto_compiler": false,
+ "auto_update": false,
+ "autopilot": true,
+ "bridges_removed_seen": false,
+ "budget_usd": 0,
+ "check_updates": true,
+ "endpoints": [],
+ "last_project": "tui-seed",
+ "launcher": {},
+ "per_session": 3,
+ "recent_models": {},
+ "rom_library": ""
+}

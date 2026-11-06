@@ -31,6 +31,9 @@ dependencies = [
 Homepage = "https://github.com/n-delic/decompdecomp"
 Source = "https://github.com/n-delic/decompdecomp"
 
+[project.optional-dependencies]
+tui = ["textual>=8.0"]  # decomp serve's terminal front end (src/decompnet/app/tui); window-only users don't install it
+
 [project.scripts]
 decomp = "decompnet.app.cli:main"
 
@@ -42,6 +45,7 @@ build-backend = "uv_build"
 dev = [
     "pytest>=9.1.1",
     "ruff==0.14.0",
+    "textual>=8.0",  # the TUI's tests run in CI (uv sync installs the dev group; the tui extra would not)
 ]
 
 [tool.ruff]

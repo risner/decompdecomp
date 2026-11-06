@@ -1,0 +1,12 @@
+{
+ "agents": [
+  {
+   "agent": "claude-3",
+   "compiles": 2,
+   "last": 0,
+   "matched": 2
+  }
+ ],
+ "compiles_last_hour": "<varies>",
+ "matches_per_hour": "<varies>"
+}

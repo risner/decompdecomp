@@ -1,0 +1,21 @@
+{
+ "address": "",
+ "addresses": [
+  {
+   "address": "http://10.0.255.5:6481",
+   "label": "this network (LAN)"
+  }
+ ],
+ "link": null,
+ "mode": "tunnel",
+ "pending": [],
+ "port": 6481,
+ "room": null,
+ "settings": {
+  "approve": false,
+  "visibility": "private"
+ },
+ "sharing": false,
+ "tunnel_supported": true,
+ "was_sharing": false
+}

@@ -1,0 +1,2546 @@
+{
+ "info": {
+  "title": "decompdecomp's API",
+  "version": "1.0.9-alpha.4",
+  "x-generated": "tests/test_api_snapshot.py --update-api"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/api/agents/detect": {
+   "post": {
+    "body": [],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "detecting": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": "Look again which agents are installed and their models (a sign-in since): in the background."
+   }
+  },
+  "/api/agents/install": {
+   "post": {
+    "body": [],
+    "called": false,
+    "query": [],
+    "summary": ""
+   }
+  },
+  "/api/agents/restart": {
+   "post": {
+    "body": [],
+    "called": false,
+    "query": [],
+    "summary": "Start a stopped or paused helper again."
+   }
+  },
+  "/api/agents/start": {
+   "post": {
+    "body": [
+     "count",
+     "kind",
+     "options",
+     "slug"
+    ],
+    "called": false,
+    "query": [],
+    "summary": ""
+   }
+  },
+  "/api/agents/stop": {
+   "post": {
+    "body": [
+     "id",
+     "remove",
+     "remove_paused",
+     "slug"
+    ],
+    "called": false,
+    "query": [],
+    "summary": "Stop a helper, remove it, remove paused helpers on a project, or stop every helper there."
+   }
+  },
+  "/api/autopilot": {
+   "post": {
+    "body": [
+     "action",
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "attempts": {
+       "type": "integer"
+      },
+      "auto_compiler": {
+       "type": "boolean"
+      },
+      "autopilot": {
+       "type": "null"
+      },
+      "boundaries": {
+       "items": null,
+       "type": "array"
+      },
+      "bytes": {
+       "type": "integer"
+      },
+      "compiler": {
+       "properties": {
+        "flags": {
+         "items": null,
+         "type": "array"
+        },
+        "installed": {
+         "type": "string"
+        },
+        "known": {
+         "type": "boolean"
+        },
+        "missing": {
+         "type": "string"
+        },
+        "name": {
+         "type": "string"
+        },
+        "proprietary": {
+         "type": "boolean"
+        },
+        "supported": {
+         "type": "boolean"
+        },
+        "toolchain": {
+         "type": "string"
+        },
+        "why": {
+         "type": "null"
+        }
+       },
+       "type": "object"
+      },
+      "compiler_ranges": {
+       "items": null,
+       "type": "array"
+      },
+      "compilers": {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      "context_version": {
+       "type": "integer"
+      },
+      "description": {
+       "type": "null"
+      },
+      "export": {
+       "type": "null"
+      },
+      "exportable": {
+       "type": "boolean"
+      },
+      "folder": {
+       "type": "string"
+      },
+      "functions": {
+       "type": "integer"
+      },
+      "helper_matches": {
+       "type": "integer"
+      },
+      "instructions": {
+       "type": "string"
+      },
+      "last_activity": {
+       "type": "integer"
+      },
+      "layout": {
+       "type": "string"
+      },
+      "matched": {
+       "type": "integer"
+      },
+      "matched_bytes": {
+       "type": "integer"
+      },
+      "permuter": {
+       "type": "null"
+      },
+      "platform": {
+       "type": "string"
+      },
+      "platform_name": {
+       "type": "string"
+      },
+      "platform_short": {
+       "type": "string"
+      },
+      "priority": {
+       "items": null,
+       "type": "array"
+      },
+      "readable": {
+       "type": "integer"
+      },
+      "rom": {
+       "properties": {
+        "byte_order": {
+         "type": "string"
+        },
+        "compiler_guess": {
+         "type": "null"
+        },
+        "game_code": {
+         "type": "string"
+        },
+        "region": {
+         "type": "string"
+        },
+        "sha1": {
+         "type": "string"
+        },
+        "size": {
+         "type": "integer"
+        },
+        "title": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      },
+      "room": {
+       "type": "null"
+      },
+      "save_folder": {
+       "type": "string"
+      },
+      "set_aside": {
+       "type": "integer"
+      },
+      "set_aside_bytes": {
+       "type": "integer"
+      },
+      "slug": {
+       "type": "string"
+      },
+      "spend": {
+       "type": "null"
+      },
+      "suggestions": {
+       "items": null,
+       "type": "array"
+      },
+      "title": {
+       "type": "string"
+      },
+      "twins": {
+       "type": "null"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/boundary": {
+   "post": {
+    "body": [
+     "action",
+     "id",
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/close": {
+   "get": {
+    "body": [],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "busy": {
+       "type": "boolean"
+      },
+      "helpers": {
+       "type": "integer"
+      },
+      "tray": {
+       "type": "boolean"
+      }
+     },
+     "type": "object"
+    },
+    "summary": "The window is being closed. GET: what's still working (the page asks the user then). POST: keep it working"
+   },
+   "post": {
+    "body": [],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "ok": {
+       "type": "boolean"
+      }
+     },
+     "type": "object"
+    },
+    "summary": "The window is being closed. GET: what's still working (the page asks the user then). POST: keep it working"
+   }
+  },
+  "/api/collab": {
+   "get": {
+    "body": [],
+    "called": true,
+    "query": [
+     "slug"
+    ],
+    "response": {
+     "properties": {
+      "address": {
+       "type": "string"
+      },
+      "addresses": {
+       "items": {
+        "properties": {
+         "address": {
+          "type": "string"
+         },
+         "label": {
+          "type": "string"
+         }
+        },
+        "type": "object"
+       },
+       "type": "array"
+      },
+      "link": {
+       "type": "null"
+      },
+      "mode": {
+       "type": "string"
+      },
+      "pending": {
+       "items": null,
+       "type": "array"
+      },
+      "port": {
+       "type": "integer"
+      },
+      "room": {
+       "type": "null"
+      },
+      "settings": {
+       "properties": {
+        "approve": {
+         "type": "boolean"
+        },
+        "visibility": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      },
+      "sharing": {
+       "type": "boolean"
+      },
+      "tunnel_supported": {
+       "type": "boolean"
+      },
+      "was_sharing": {
+       "type": "boolean"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/collab/join": {
+   "post": {
+    "body": [],
+    "called": false,
+    "query": [
+     "confirmed",
+     "filename",
+     "link",
+     "name",
+     "path"
+    ],
+    "summary": ""
+   }
+  },
+  "/api/collab/leave": {
+   "post": {
+    "body": [],
+    "called": false,
+    "query": [],
+    "summary": ""
+   }
+  },
+  "/api/collab/manage": {
+   "post": {
+    "body": [
+     "action",
+     "approve",
+     "name",
+     "slug",
+     "visibility"
+    ],
+    "called": false,
+    "query": [],
+    "summary": "The host's controls: who's in, public or private, a fresh invite link."
+   }
+  },
+  "/api/collab/reconnect": {
+   "post": {
+    "body": [
+     "link",
+     "slug"
+    ],
+    "called": false,
+    "query": [],
+    "summary": ""
+   }
+  },
+  "/api/collab/start": {
+   "post": {
+    "body": [
+     "address",
+     "approve",
+     "keep",
+     "mode",
+     "port",
+     "slug",
+     "visibility"
+    ],
+    "called": false,
+    "query": [],
+    "summary": ""
+   }
+  },
+  "/api/collab/stop": {
+   "post": {
+    "body": [],
+    "called": false,
+    "query": [],
+    "summary": ""
+   }
+  },
+  "/api/compiler": {
+   "post": {
+    "body": [
+     "auto",
+     "flags",
+     "ranges",
+     "remove",
+     "reopen",
+     "slug",
+     "toolchain"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/compilermap": {
+   "get": {
+    "body": [
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   },
+   "post": {
+    "body": [
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/delete": {
+   "post": {
+    "body": [
+     "files",
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "ok": {
+       "type": "boolean"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/diff": {
+   "get": {
+    "body": [
+     "slug"
+    ],
+    "called": true,
+    "query": [
+     "slug"
+    ],
+    "response": {
+     "properties": {
+      "kind": {
+       "type": "null"
+      },
+      "rows": {
+       "type": "null"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/endpoints/models": {
+   "get": {
+    "body": [],
+    "called": true,
+    "query": [
+     "id"
+    ],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": "List models from one saved endpoint, using its own key and never returning connection details."
+   }
+  },
+  "/api/events": {
+   "get": {
+    "body": [],
+    "called": true,
+    "query": [
+     "after",
+     "recent"
+    ],
+    "response": {
+     "properties": {
+      "events": {
+       "items": {
+        "properties": {
+         "agent": {
+          "type": "string"
+         },
+         "created_at": {
+          "type": "integer"
+         },
+         "detail": {
+          "type": "string"
+         },
+         "id": {
+          "type": "integer"
+         },
+         "kind": {
+          "type": "string"
+         },
+         "project": {
+          "type": "string"
+         },
+         "slug": {
+          "type": "string"
+         }
+        },
+        "type": "object"
+       },
+       "type": "array"
+      },
+      "last": {
+       "type": "integer"
+      }
+     },
+     "type": "object"
+    },
+    "summary": "The notification centre, for every project: `after=N` what happened since event N (no `after`: where the"
+   }
+  },
+  "/api/export": {
+   "post": {
+    "body": [
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "job": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/fork": {
+   "post": {
+    "body": [
+     "name",
+     "platform",
+     "repo",
+     "version"
+    ],
+    "called": false,
+    "query": [],
+    "summary": ""
+   }
+  },
+  "/api/fork/check": {
+   "post": {
+    "body": [],
+    "called": false,
+    "query": [],
+    "summary": "Pick a hand-built project up (or re-measure one): builds what changed, then reads its objdiff.json and"
+   }
+  },
+  "/api/fork/find-rom": {
+   "post": {
+    "body": [
+     "slug"
+    ],
+    "called": false,
+    "query": [],
+    "summary": ""
+   }
+  },
+  "/api/fork/game": {
+   "post": {
+    "body": [],
+    "called": false,
+    "query": [
+     "confirmed",
+     "name",
+     "slug"
+    ],
+    "summary": "The user's game file, streamed to disk (GameCube and Wii discs are gigabytes)."
+   }
+  },
+  "/api/fork/needs": {
+   "get": {
+    "body": [
+     "slug"
+    ],
+    "called": true,
+    "query": [
+     "slug"
+    ],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/fork/policy": {
+   "post": {
+    "body": [
+     "repo"
+    ],
+    "called": false,
+    "query": [],
+    "summary": "What a public decomp says about AI and contributions, read from its own files before it's forked."
+   }
+  },
+  "/api/fork/rom-check": {
+   "post": {
+    "body": [],
+    "called": false,
+    "query": [],
+    "summary": "A GameCube or Wii game from scratch: rebuild the program and compare it with the user's copy."
+   }
+  },
+  "/api/fork/setup": {
+   "post": {
+    "body": [
+     "confirmed",
+     "path",
+     "slug"
+    ],
+    "called": false,
+    "query": [],
+    "summary": "Set up with a game file already on this computer (`path`), or with none (`path` empty: run the build)."
+   }
+  },
+  "/api/fork/start-files": {
+   "post": {
+    "body": [],
+    "called": false,
+    "query": [],
+    "summary": "Give the code no source file covers source files (dtk-template projects), verified by the game's checksum."
+   }
+  },
+  "/api/function": {
+   "get": {
+    "body": [
+     "slug"
+    ],
+    "called": true,
+    "query": [
+     "slug"
+    ],
+    "response": {
+     "properties": {
+      "asm": {
+       "type": "string"
+      },
+      "best": {
+       "type": "null"
+      },
+      "called_by": {
+       "items": null,
+       "type": "array"
+      },
+      "calls": {
+       "items": null,
+       "type": "array"
+      },
+      "insns": {
+       "type": "integer"
+      },
+      "name": {
+       "type": "string"
+      },
+      "notes": {
+       "items": null,
+       "type": "array"
+      },
+      "rom_offset": {
+       "type": "null"
+      },
+      "scores": {
+       "items": null,
+       "type": "array"
+      },
+      "size": {
+       "type": "integer"
+      },
+      "source": {
+       "type": "string"
+      },
+      "source_kind": {
+       "type": "null"
+      },
+      "status": {
+       "type": "string"
+      },
+      "vram": {
+       "type": "integer"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/import": {
+   "post": {
+    "body": [],
+    "called": false,
+    "query": [
+     "accept",
+     "all_compilers",
+     "confirmed",
+     "demo",
+     "extras",
+     "name",
+     "options",
+     "path",
+     "scope",
+     "toolchain"
+    ],
+    "summary": "A game the user owns: the demo, an upload streamed to disk (discs are gigabytes), or a local path."
+   }
+  },
+  "/api/instructions": {
+   "post": {
+    "body": [
+     "slug",
+     "text"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "attempts": {
+       "type": "integer"
+      },
+      "auto_compiler": {
+       "type": "boolean"
+      },
+      "autopilot": {
+       "type": "null"
+      },
+      "boundaries": {
+       "items": null,
+       "type": "array"
+      },
+      "bytes": {
+       "type": "integer"
+      },
+      "compiler": {
+       "properties": {
+        "flags": {
+         "items": null,
+         "type": "array"
+        },
+        "installed": {
+         "type": "string"
+        },
+        "known": {
+         "type": "boolean"
+        },
+        "missing": {
+         "type": "string"
+        },
+        "name": {
+         "type": "string"
+        },
+        "proprietary": {
+         "type": "boolean"
+        },
+        "supported": {
+         "type": "boolean"
+        },
+        "toolchain": {
+         "type": "string"
+        },
+        "why": {
+         "type": "null"
+        }
+       },
+       "type": "object"
+      },
+      "compiler_ranges": {
+       "items": null,
+       "type": "array"
+      },
+      "compilers": {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      "context_version": {
+       "type": "integer"
+      },
+      "description": {
+       "type": "null"
+      },
+      "export": {
+       "type": "null"
+      },
+      "exportable": {
+       "type": "boolean"
+      },
+      "folder": {
+       "type": "string"
+      },
+      "functions": {
+       "type": "integer"
+      },
+      "helper_matches": {
+       "type": "integer"
+      },
+      "instructions": {
+       "type": "string"
+      },
+      "last_activity": {
+       "type": "integer"
+      },
+      "layout": {
+       "type": "string"
+      },
+      "matched": {
+       "type": "integer"
+      },
+      "matched_bytes": {
+       "type": "integer"
+      },
+      "permuter": {
+       "type": "null"
+      },
+      "platform": {
+       "type": "string"
+      },
+      "platform_name": {
+       "type": "string"
+      },
+      "platform_short": {
+       "type": "string"
+      },
+      "priority": {
+       "items": null,
+       "type": "array"
+      },
+      "readable": {
+       "type": "integer"
+      },
+      "rom": {
+       "properties": {
+        "byte_order": {
+         "type": "string"
+        },
+        "compiler_guess": {
+         "type": "null"
+        },
+        "game_code": {
+         "type": "string"
+        },
+        "region": {
+         "type": "string"
+        },
+        "sha1": {
+         "type": "string"
+        },
+        "size": {
+         "type": "integer"
+        },
+        "title": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      },
+      "room": {
+       "type": "null"
+      },
+      "save_folder": {
+       "type": "string"
+      },
+      "set_aside": {
+       "type": "integer"
+      },
+      "set_aside_bytes": {
+       "type": "integer"
+      },
+      "slug": {
+       "type": "string"
+      },
+      "spend": {
+       "type": "null"
+      },
+      "suggestions": {
+       "items": null,
+       "type": "array"
+      },
+      "title": {
+       "type": "string"
+      },
+      "twins": {
+       "type": "null"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/job": {
+   "get": {
+    "body": [],
+    "called": true,
+    "query": [
+     "id"
+    ],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/job/cancel": {
+   "post": {
+    "body": [
+     "id"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "cancelled": {
+       "type": "boolean"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/knowledge": {
+   "get": {
+    "body": [
+     "accept",
+     "auto",
+     "id",
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "auto": {
+       "type": "boolean"
+      },
+      "items": {
+       "items": null,
+       "type": "array"
+      },
+      "models_to_agree": {
+       "type": "integer"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   },
+   "post": {
+    "body": [
+     "accept",
+     "auto",
+     "id",
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "auto": {
+       "type": "boolean"
+      },
+      "items": {
+       "items": null,
+       "type": "array"
+      },
+      "models_to_agree": {
+       "type": "integer"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/linux-vm": {
+   "post": {
+    "body": [],
+    "called": false,
+    "query": [],
+    "summary": ""
+   }
+  },
+  "/api/live": {
+   "get": {
+    "body": [
+     "slug"
+    ],
+    "called": true,
+    "query": [
+     "a",
+     "e",
+     "s"
+    ],
+    "response": {
+     "properties": {
+      "attempts": {
+       "items": {
+        "properties": {
+         "agent": {
+          "type": "string"
+         },
+         "compiled": {
+          "type": "integer"
+         },
+         "created_at": {
+          "type": "integer"
+         },
+         "function": {
+          "type": "string"
+         },
+         "id": {
+          "type": "integer"
+         },
+         "n_insns": {
+          "type": "integer"
+         },
+         "score": {
+          "type": "integer"
+         }
+        },
+        "type": "object"
+       },
+       "type": "array"
+      },
+      "claims": {
+       "items": {
+        "properties": {
+         "agent": {
+          "type": "string"
+         },
+         "attempts": {
+          "type": "integer"
+         },
+         "best_score": {
+          "type": "null"
+         },
+         "claimed_at": {
+          "type": "integer"
+         },
+         "n_insns": {
+          "type": "integer"
+         },
+         "name": {
+          "type": "string"
+         }
+        },
+        "type": "object"
+       },
+       "type": "array"
+      },
+      "cut": {
+       "type": "boolean"
+      },
+      "events": {
+       "items": {
+        "properties": {
+         "agent": {
+          "type": "string"
+         },
+         "created_at": {
+          "type": "integer"
+         },
+         "detail": {
+          "type": "string"
+         },
+         "id": {
+          "type": "integer"
+         },
+         "kind": {
+          "type": "string"
+         }
+        },
+        "type": "object"
+       },
+       "type": "array"
+      },
+      "overview": {
+       "properties": {
+        "attempts": {
+         "type": "integer"
+        },
+        "auto_compiler": {
+         "type": "boolean"
+        },
+        "autopilot": {
+         "type": "null"
+        },
+        "boundaries": {
+         "items": null,
+         "type": "array"
+        },
+        "bytes": {
+         "type": "integer"
+        },
+        "compiler": {
+         "properties": {
+          "flags": {
+           "items": null,
+           "type": "array"
+          },
+          "installed": {
+           "type": "string"
+          },
+          "known": {
+           "type": "boolean"
+          },
+          "missing": {
+           "type": "string"
+          },
+          "name": {
+           "type": "string"
+          },
+          "proprietary": {
+           "type": "boolean"
+          },
+          "supported": {
+           "type": "boolean"
+          },
+          "toolchain": {
+           "type": "string"
+          },
+          "why": {
+           "type": "null"
+          }
+         },
+         "type": "object"
+        },
+        "compiler_ranges": {
+         "items": null,
+         "type": "array"
+        },
+        "compilers": {
+         "items": {
+          "type": "string"
+         },
+         "type": "array"
+        },
+        "context_version": {
+         "type": "integer"
+        },
+        "description": {
+         "type": "null"
+        },
+        "export": {
+         "type": "null"
+        },
+        "exportable": {
+         "type": "boolean"
+        },
+        "folder": {
+         "type": "string"
+        },
+        "functions": {
+         "type": "integer"
+        },
+        "helper_matches": {
+         "type": "integer"
+        },
+        "instructions": {
+         "type": "string"
+        },
+        "last_activity": {
+         "type": "integer"
+        },
+        "layout": {
+         "type": "string"
+        },
+        "matched": {
+         "type": "integer"
+        },
+        "matched_bytes": {
+         "type": "integer"
+        },
+        "permuter": {
+         "type": "null"
+        },
+        "platform": {
+         "type": "string"
+        },
+        "platform_name": {
+         "type": "string"
+        },
+        "platform_short": {
+         "type": "string"
+        },
+        "priority": {
+         "items": null,
+         "type": "array"
+        },
+        "readable": {
+         "type": "integer"
+        },
+        "rom": {
+         "properties": {
+          "byte_order": {
+           "type": "string"
+          },
+          "compiler_guess": {
+           "type": "null"
+          },
+          "game_code": {
+           "type": "string"
+          },
+          "region": {
+           "type": "string"
+          },
+          "sha1": {
+           "type": "string"
+          },
+          "size": {
+           "type": "integer"
+          },
+          "title": {
+           "type": "string"
+          }
+         },
+         "type": "object"
+        },
+        "room": {
+         "type": "null"
+        },
+        "save_folder": {
+         "type": "string"
+        },
+        "set_aside": {
+         "type": "integer"
+        },
+        "set_aside_bytes": {
+         "type": "integer"
+        },
+        "slug": {
+         "type": "string"
+        },
+        "spend": {
+         "type": "null"
+        },
+        "suggestions": {
+         "items": null,
+         "type": "array"
+        },
+        "title": {
+         "type": "string"
+        },
+        "twins": {
+         "type": "null"
+        }
+       },
+       "type": "object"
+      },
+      "sessions": {
+       "items": null,
+       "type": "array"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/log": {
+   "get": {
+    "body": [],
+    "called": true,
+    "query": [],
+    "response": {
+     "format": "text",
+     "type": "string"
+    },
+    "summary": "The end of decompdecomp's log, to read in the app or attach to a bug report."
+   },
+   "post": {
+    "body": [
+     "message",
+     "stack",
+     "where"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "ok": {
+       "type": "boolean"
+      }
+     },
+     "type": "object"
+    },
+    "summary": "An error in the page's own scripts, into the app's log: a broken page otherwise leaves nothing behind."
+   }
+  },
+  "/api/map": {
+   "get": {
+    "body": [],
+    "called": true,
+    "query": [
+     "since",
+     "slug"
+    ],
+    "response": {
+     "properties": {
+      "keys": {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      "rows": {
+       "items": {
+        "properties": {
+         "agent": {
+          "type": "null"
+         },
+         "attempts": {
+          "type": "integer"
+         },
+         "best": {
+          "type": "null"
+         },
+         "insns": {
+          "type": "integer"
+         },
+         "matched_at": {
+          "type": "null"
+         },
+         "matched_by": {
+          "type": "null"
+         },
+         "name": {
+          "type": "string"
+         },
+         "not_c": {
+          "type": "boolean"
+         },
+         "polished": {
+          "type": "boolean"
+         },
+         "size": {
+          "type": "integer"
+         },
+         "status": {
+          "type": "string"
+         },
+         "unit": {
+          "type": "string"
+         },
+         "vram": {
+          "type": "integer"
+         }
+        },
+        "type": "object"
+       },
+       "type": "array"
+      },
+      "sig": {
+       "type": "string"
+      },
+      "unchanged": {
+       "properties": {
+        "same": {
+         "type": "boolean"
+        },
+        "sig": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "type": "object"
+    },
+    "response-values": {
+     "status": [
+      "asm",
+      "matched",
+      "open",
+      "working"
+     ]
+    },
+    "summary": "Every function, for the map and the table. `since`: the signature the GUI has; when nothing changed, the"
+   }
+  },
+  "/api/mapcolumns": {
+   "get": {
+    "body": [],
+    "called": true,
+    "query": [
+     "slug"
+    ],
+    "response": {
+     "properties": {
+      "keys": {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      "rows": {
+       "items": null,
+       "type": "array"
+      }
+     },
+     "type": "object"
+    },
+    "summary": "The compiler map's colours for the ROM map (MIPS games), asked for after the map is drawn."
+   }
+  },
+  "/api/modelcosts": {
+   "get": {
+    "body": [
+     "slug"
+    ],
+    "called": true,
+    "query": [
+     "slug"
+    ],
+    "response": {
+     "items": null,
+     "type": "array"
+    },
+    "summary": ""
+   }
+  },
+  "/api/note": {
+   "post": {
+    "body": [
+     "function",
+     "slug",
+     "text"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/open": {
+   "post": {
+    "body": [
+     "slug"
+    ],
+    "called": false,
+    "query": [],
+    "summary": ""
+   }
+  },
+  "/api/pick": {
+   "post": {
+    "body": [
+     "kind",
+     "title"
+    ],
+    "called": false,
+    "query": [],
+    "summary": "A folder or file the user picks in the system's own chooser (picker.py): \"\" if they cancelled."
+   }
+  },
+  "/api/priority": {
+   "post": {
+    "body": [
+     "name",
+     "on",
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "priority": {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/project": {
+   "get": {
+    "body": [
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "attempts": {
+       "type": "integer"
+      },
+      "auto_compiler": {
+       "type": "boolean"
+      },
+      "autopilot": {
+       "type": "null"
+      },
+      "boundaries": {
+       "items": null,
+       "type": "array"
+      },
+      "bytes": {
+       "type": "integer"
+      },
+      "compiler": {
+       "properties": {
+        "flags": {
+         "items": null,
+         "type": "array"
+        },
+        "installed": {
+         "type": "string"
+        },
+        "known": {
+         "type": "boolean"
+        },
+        "missing": {
+         "type": "string"
+        },
+        "name": {
+         "type": "string"
+        },
+        "proprietary": {
+         "type": "boolean"
+        },
+        "supported": {
+         "type": "boolean"
+        },
+        "toolchain": {
+         "type": "string"
+        },
+        "why": {
+         "type": "null"
+        }
+       },
+       "type": "object"
+      },
+      "compiler_ranges": {
+       "items": null,
+       "type": "array"
+      },
+      "compilers": {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      "context_version": {
+       "type": "integer"
+      },
+      "description": {
+       "type": "null"
+      },
+      "export": {
+       "type": "null"
+      },
+      "exportable": {
+       "type": "boolean"
+      },
+      "folder": {
+       "type": "string"
+      },
+      "functions": {
+       "type": "integer"
+      },
+      "helper_matches": {
+       "type": "integer"
+      },
+      "instructions": {
+       "type": "string"
+      },
+      "last_activity": {
+       "type": "integer"
+      },
+      "layout": {
+       "type": "string"
+      },
+      "matched": {
+       "type": "integer"
+      },
+      "matched_bytes": {
+       "type": "integer"
+      },
+      "permuter": {
+       "type": "null"
+      },
+      "platform": {
+       "type": "string"
+      },
+      "platform_name": {
+       "type": "string"
+      },
+      "platform_short": {
+       "type": "string"
+      },
+      "priority": {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      "readable": {
+       "type": "integer"
+      },
+      "rom": {
+       "properties": {
+        "byte_order": {
+         "type": "string"
+        },
+        "compiler_guess": {
+         "type": "null"
+        },
+        "game_code": {
+         "type": "string"
+        },
+        "region": {
+         "type": "string"
+        },
+        "sha1": {
+         "type": "string"
+        },
+        "size": {
+         "type": "integer"
+        },
+        "title": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      },
+      "room": {
+       "type": "null"
+      },
+      "save_folder": {
+       "type": "string"
+      },
+      "set_aside": {
+       "type": "integer"
+      },
+      "set_aside_bytes": {
+       "type": "integer"
+      },
+      "slug": {
+       "type": "string"
+      },
+      "spend": {
+       "type": "null"
+      },
+      "suggestions": {
+       "items": null,
+       "type": "array"
+      },
+      "title": {
+       "type": "string"
+      },
+      "twins": {
+       "type": "null"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/projects": {
+   "get": {
+    "body": [],
+    "called": true,
+    "query": [],
+    "response": {
+     "items": {
+      "properties": {
+       "autopilot": {
+        "type": "null"
+       },
+       "broken": {
+        "type": "string"
+       },
+       "bytes": {
+        "type": "integer"
+       },
+       "compiler": {
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "type": "object"
+       },
+       "functions": {
+        "type": "integer"
+       },
+       "last_activity": {
+        "type": "integer"
+       },
+       "layout": {
+        "type": "string"
+       },
+       "matched": {
+        "type": "integer"
+       },
+       "matched_bytes": {
+        "type": "integer"
+       },
+       "platform": {
+        "type": "string"
+       },
+       "platform_name": {
+        "type": "string"
+       },
+       "platform_short": {
+        "type": "string"
+       },
+       "progress_error": {
+        "type": "null"
+       },
+       "rom": {
+        "properties": {
+         "game_code": {
+          "type": "string"
+         },
+         "region": {
+          "type": "string"
+         }
+        },
+        "type": "object"
+       },
+       "room": {
+        "type": "null"
+       },
+       "set_aside": {
+        "type": "integer"
+       },
+       "set_aside_bytes": {
+        "type": "integer"
+       },
+       "slug": {
+        "type": "string"
+       },
+       "title": {
+        "type": "string"
+       },
+       "working": {
+        "type": "integer"
+       }
+      },
+      "type": "object"
+     },
+     "type": "array"
+    },
+    "summary": ""
+   }
+  },
+  "/api/quit": {
+   "post": {
+    "body": [],
+    "called": false,
+    "query": [],
+    "summary": ""
+   }
+  },
+  "/api/recheck": {
+   "post": {
+    "body": [
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "job": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/reimport": {
+   "post": {
+    "body": [
+     "confirmed",
+     "path",
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/release": {
+   "post": {
+    "body": [
+     "name",
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "ok": {
+       "type": "boolean"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/reopen": {
+   "post": {
+    "body": [
+     "name",
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "ok": {
+       "type": "boolean"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/restore": {
+   "post": {
+    "body": [
+     "confirmed",
+     "path",
+     "source"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": "A project rebuilt from a save (a folder, or a git repository's address) and the user's own copy of the"
+   }
+  },
+  "/api/save": {
+   "post": {
+    "body": [
+     "folder",
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/scope": {
+   "post": {
+    "body": [
+     "scope",
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/setaside": {
+   "post": {
+    "body": [
+     "name",
+     "slug",
+     "why"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "ok": {
+       "type": "boolean"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/settings": {
+   "post": {
+    "body": [
+     "api",
+     "auto_compiler",
+     "auto_update",
+     "autopilot",
+     "bridges_removed_seen",
+     "budget_usd",
+     "check_updates",
+     "endpoint",
+     "notes_cleared_to",
+     "per_session",
+     "remove_endpoint",
+     "rom_library"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "api": {
+       "properties": {},
+       "type": "object"
+      },
+      "auto_compiler": {
+       "type": "boolean"
+      },
+      "auto_update": {
+       "type": "boolean"
+      },
+      "autopilot": {
+       "type": "boolean"
+      },
+      "bridges_removed_seen": {
+       "type": "boolean"
+      },
+      "budget_usd": {
+       "type": "integer"
+      },
+      "check_updates": {
+       "type": "boolean"
+      },
+      "endpoints": {
+       "items": null,
+       "type": "array"
+      },
+      "last_project": {
+       "type": "string"
+      },
+      "launcher": {
+       "properties": {},
+       "type": "object"
+      },
+      "per_session": {
+       "type": "integer"
+      },
+      "recent_models": {
+       "properties": {},
+       "type": "object"
+      },
+      "rom_library": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/state": {
+   "get": {
+    "body": [],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "agents": {
+       "type": "string"
+      },
+      "agents_detecting": {
+       "type": "string"
+      },
+      "api_presets": {
+       "type": "string"
+      },
+      "bridges_removed": {
+       "type": "string"
+      },
+      "build": {
+       "type": "string"
+      },
+      "consoles": {
+       "type": "string"
+      },
+      "dev": {
+       "type": "boolean"
+      },
+      "home": {
+       "type": "string"
+      },
+      "install": {
+       "type": "string"
+      },
+      "linux_vm": {
+       "properties": {
+        "ready": {
+         "type": "boolean"
+        },
+        "why": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      },
+      "log_file": {
+       "type": "string"
+      },
+      "mcp_url": {
+       "type": "string"
+      },
+      "platform": {
+       "type": "string"
+      },
+      "settings": {
+       "type": "string"
+      },
+      "system": {
+       "type": "string"
+      },
+      "toolchains": {
+       "type": "string"
+      },
+      "version": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/stats": {
+   "get": {
+    "body": [
+     "slug"
+    ],
+    "called": true,
+    "query": [
+     "slug"
+    ],
+    "response": {
+     "properties": {
+      "agents": {
+       "items": {
+        "properties": {
+         "agent": {
+          "type": "string"
+         },
+         "compiles": {
+          "type": "integer"
+         },
+         "last": {
+          "type": "integer"
+         },
+         "matched": {
+          "type": "integer"
+         }
+        },
+        "type": "object"
+       },
+       "type": "array"
+      },
+      "compiles_last_hour": {
+       "type": "string"
+      },
+      "matches_per_hour": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/suggestion": {
+   "post": {
+    "body": [
+     "action",
+     "id",
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/title": {
+   "post": {
+    "body": [
+     "slug",
+     "title"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "attempts": {
+       "type": "integer"
+      },
+      "auto_compiler": {
+       "type": "boolean"
+      },
+      "autopilot": {
+       "type": "null"
+      },
+      "boundaries": {
+       "items": null,
+       "type": "array"
+      },
+      "bytes": {
+       "type": "integer"
+      },
+      "compiler": {
+       "properties": {
+        "flags": {
+         "items": null,
+         "type": "array"
+        },
+        "installed": {
+         "type": "string"
+        },
+        "known": {
+         "type": "boolean"
+        },
+        "missing": {
+         "type": "string"
+        },
+        "name": {
+         "type": "string"
+        },
+        "proprietary": {
+         "type": "boolean"
+        },
+        "supported": {
+         "type": "boolean"
+        },
+        "toolchain": {
+         "type": "string"
+        },
+        "why": {
+         "type": "null"
+        }
+       },
+       "type": "object"
+      },
+      "compiler_ranges": {
+       "items": null,
+       "type": "array"
+      },
+      "compilers": {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      "context_version": {
+       "type": "integer"
+      },
+      "description": {
+       "type": "null"
+      },
+      "export": {
+       "type": "null"
+      },
+      "exportable": {
+       "type": "boolean"
+      },
+      "folder": {
+       "type": "string"
+      },
+      "functions": {
+       "type": "integer"
+      },
+      "helper_matches": {
+       "type": "integer"
+      },
+      "instructions": {
+       "type": "string"
+      },
+      "last_activity": {
+       "type": "integer"
+      },
+      "layout": {
+       "type": "string"
+      },
+      "matched": {
+       "type": "integer"
+      },
+      "matched_bytes": {
+       "type": "integer"
+      },
+      "permuter": {
+       "type": "null"
+      },
+      "platform": {
+       "type": "string"
+      },
+      "platform_name": {
+       "type": "string"
+      },
+      "platform_short": {
+       "type": "string"
+      },
+      "priority": {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      "readable": {
+       "type": "integer"
+      },
+      "rom": {
+       "properties": {
+        "byte_order": {
+         "type": "string"
+        },
+        "compiler_guess": {
+         "type": "null"
+        },
+        "game_code": {
+         "type": "string"
+        },
+        "region": {
+         "type": "string"
+        },
+        "sha1": {
+         "type": "string"
+        },
+        "size": {
+         "type": "integer"
+        },
+        "title": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      },
+      "room": {
+       "type": "null"
+      },
+      "save_folder": {
+       "type": "string"
+      },
+      "set_aside": {
+       "type": "integer"
+      },
+      "set_aside_bytes": {
+       "type": "integer"
+      },
+      "slug": {
+       "type": "string"
+      },
+      "spend": {
+       "type": "null"
+      },
+      "suggestions": {
+       "items": null,
+       "type": "array"
+      },
+      "title": {
+       "type": "string"
+      },
+      "twins": {
+       "type": "null"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/toolchain": {
+   "post": {
+    "body": [
+     "accept_license",
+     "folder",
+     "id"
+    ],
+    "called": false,
+    "query": [],
+    "summary": ""
+   }
+  },
+  "/api/toolchain/all": {
+   "post": {
+    "body": [
+     "accept_license",
+     "slug"
+    ],
+    "called": false,
+    "query": [],
+    "summary": "Every compiler of a project's console, then its compiler test again (Engine.install_compilers)."
+   }
+  },
+  "/api/toolchain/remove": {
+   "post": {
+    "body": [
+     "folder",
+     "id"
+    ],
+    "called": false,
+    "query": [],
+    "summary": "Forget one of the user's own copies of a kit (its files stay where they are)."
+   }
+  },
+  "/api/try": {
+   "post": {
+    "body": [
+     "name",
+     "slug",
+     "source"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/unanalysed": {
+   "post": {
+    "body": [
+     "slug"
+    ],
+    "called": true,
+    "query": [],
+    "response": {
+     "properties": {
+      "error": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": ""
+   }
+  },
+  "/api/update": {
+   "get": {
+    "body": [
+     "branch",
+     "channel"
+    ],
+    "called": true,
+    "query": [
+     "refresh"
+    ],
+    "response": {
+     "properties": {
+      "available": {
+       "type": "boolean"
+      },
+      "current": {
+       "type": "string"
+      },
+      "disabled": {
+       "type": "boolean"
+      },
+      "job": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    },
+    "summary": "Whether a newer decompdecomp is out (checked now and then; ?refresh=1 now) and, POSTed, installing it."
+   },
+   "post": {
+    "body": [
+     "branch",
+     "channel"
+    ],
+    "called": false,
+    "query": [
+     "refresh"
+    ],
+    "summary": "Whether a newer decompdecomp is out (checked now and then; ?refresh=1 now) and, POSTed, installing it."
+   }
+  },
+  "/api/window": {
+   "post": {
+    "body": [],
+    "called": false,
+    "query": [],
+    "summary": "`decomp` run again while the app runs, or the tray icon: open the window, or bring it to the front."
+   }
+  }
+ }
+}

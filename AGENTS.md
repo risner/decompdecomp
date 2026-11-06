@@ -169,6 +169,11 @@ linting). In short:
 - Errors shown to the user or agent are `ForkError` / `NetworkError` with a sentence they can act on.
 - Every behavior change gets a test in `tests/`. Tests that need a real game or a compiler skip when it isn't there
   (CI has none of them); small homemade games/objects live in `projects/demo-*` and are built by their own scripts.
+- The `/api/` routes are a contract with the TUI (`src/decompnet/app/tui/`, the terminal front end `decomp serve`
+  runs; `docs/TUI.md` says how it works): `tests/api/` is a generated description of them
+  (`tests/test_api_snapshot.py`), and a change to the API updates the TUI and regenerates it in the same pull
+  request (`uv run pytest tests/test_api_snapshot.py --update-api`); a new `POST` route gets a sample body in
+  `tests/api/requests.json` or a reason in `tests/api/excluded.json`.
 - `uv run ruff check src tests projects` passes (CI runs it). No formatter: don't run `ruff format`.
 - A change goes on a branch named `<type>/<short-name>`, the type one of `feat`, `fix`, `refactor`, `perf`, `docs`,
   `test`, `ci`, `build`, `chore`, `revert` (`fix/ps2-long-symbol-names`); a pull request from any other branch fails

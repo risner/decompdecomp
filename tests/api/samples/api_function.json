@@ -1,0 +1,16 @@
+{
+ "asm": "jr $ra",
+ "best": null,
+ "called_by": [],
+ "calls": [],
+ "insns": 64,
+ "name": "func_80000020",
+ "notes": [],
+ "rom_offset": null,
+ "scores": [],
+ "size": 256,
+ "source": "",
+ "source_kind": null,
+ "status": "open",
+ "vram": 2147483680
+}
