@@ -56,17 +56,26 @@ def wine_setup() -> tuple[str, dict]:
     return wine, {**os.environ, **WINE_QUIET, "WINEPREFIX": prefix}
 
 
+def _has_mspdb(folder: Path) -> bool:
+    """Whether a folder holds a program database DLL: mspdb80.dll (2005, 2008), mspdb100/110/120.dll (2010 to 2013),
+    mspdb140.dll and mspdbcore.dll (2015 and newer)."""
+    try:
+        return any(p.name.lower().startswith("mspdb") and p.suffix.lower() == ".dll" for p in folder.iterdir())
+    except OSError:
+        return False
+
+
 def _dll_dirs(compiler: str) -> list[str]:
-    """DLL directories a cross-hosted cl.exe needs on PATH. The 2005-2013 x86_amd64 compiler's mspdb*.dll sits in its
-    parent `bin`, not beside it (and some of its tools are in Common7/IDE), so without these it fails to load
-    mspdb80.dll. Empty when the DLLs are already beside cl.exe (2015+ and the native x64 compilers), so an ordinary
-    compile is unchanged."""
+    """DLL directories a cross-hosted cl.exe needs. The 2005-2013 x86_amd64 compiler's mspdb*.dll sits in its parent
+    `bin`, and 2017's bin/Hostx86/x64 compiler's in its 32-bit sibling bin/Hostx86/x86, not beside it (and some of its
+    tools are in Common7/IDE), so without these it fails to load them. Empty when the DLLs are already beside cl.exe
+    (the native x64 compilers), so an ordinary compile is unchanged."""
     cl = Path(compiler)
-    if (cl.parent / "mspdb80.dll").exists() or (cl.parent / "mspdbcore.dll").exists():
+    if _has_mspdb(cl.parent):
         return []
     dirs: list[str] = []
-    for up in cl.parents:
-        if (up / "mspdb80.dll").exists() or (up / "mspdbcore.dll").exists():
+    for up in (cl.parent.parent / "x86", *cl.parents):
+        if up.is_dir() and _has_mspdb(up):
             dirs.append(str(up))
             break
     for up in cl.parents:
@@ -101,8 +110,12 @@ def main() -> int:
         f"/Fo{path(args.output)}", path(args.source)]
     extra = _dll_dirs(args.compiler)
     if extra:
-        current = env if env is not None else dict(os.environ)
-        current["PATH"] = os.pathsep.join([*extra, current.get("PATH", "")])
+        current = dict(os.environ if env is None else env)
+        if sys.platform == "win32":
+            current["PATH"] = os.pathsep.join([*extra, current.get("PATH", "")])
+        else:  # wine and wibo search WINEPATH (";" between folders), not the Mac's or Linux's PATH; wine reads Z:\...
+            found = [windows_path(d) if args.wine else d for d in extra]
+            current["WINEPATH"] = ";".join([*found, *filter(None, [current.get("WINEPATH")])])
         env = current
     if args.wine:
         # wine's output to a file, then ours: the services the first wine program after a new server starts
